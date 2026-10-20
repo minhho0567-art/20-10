@@ -1,0 +1,1252 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fffdf9" />
+  <meta name="description" content="Một món quà nhỏ đầy yêu thương dành tặng những người phụ nữ tuyệt vời nhân ngày 20/10." />
+  <title>Một chút yêu thương · 20/10</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FFFDF9',
+            blush: '#FFE4E6',
+            rose: '#F43F5E',
+            lavender: '#E0E7FF',
+            rosegold: '#B98372'
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --cream: #fffdf9;
+      --ink: #47343a;
+      --muted: #87777b;
+      --rose: #f43f5e;
+      --rose-dark: #d94a68;
+      --blush: #ffe4e6;
+      --lavender: #e8eaff;
+      --gold: #b98372;
+      --line: rgba(121, 76, 83, .12);
+      --content: 1160px;
+      --sans: 'Plus Jakarta Sans', sans-serif;
+      --serif: 'Playfair Display', Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    body::before {
+      position: fixed;
+      z-index: -2;
+      inset: 0;
+      content: '';
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 9% 13%, rgba(255, 228, 230, .62), transparent 29%),
+        radial-gradient(ellipse at 92% 17%, rgba(224, 231, 255, .58), transparent 31%),
+        radial-gradient(ellipse at 48% 98%, rgba(250, 222, 215, .27), transparent 29%),
+        var(--cream);
+    }
+    button, input, textarea { font: inherit; }
+    button { color: inherit; }
+    button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 3px solid rgba(244, 63, 94, .42);
+      outline-offset: 4px;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+    .page-shell { position: relative; isolation: isolate; }
+    .ambient-orb {
+      position: absolute;
+      z-index: -1;
+      width: 310px;
+      height: 310px;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: .55;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255, 212, 220, .5), rgba(255, 212, 220, 0) 68%);
+    }
+    #sparkleLayer { position: fixed; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; }
+    .sparkle {
+      position: absolute;
+      width: var(--size, 4px);
+      height: var(--size, 4px);
+      border-radius: 50%;
+      opacity: 0;
+      background: #dda9a9;
+      box-shadow: 0 0 10px 2px rgba(255, 162, 179, .42);
+      animation: sparkleFloat var(--duration, 8s) ease-in-out var(--delay, 0s) infinite;
+    }
+    @keyframes sparkleFloat {
+      0%, 100% { transform: translate3d(0, 10px, 0) scale(.5); opacity: 0; }
+      25% { opacity: .7; }
+      55% { transform: translate3d(12px, -34px, 0) scale(1.15); opacity: .38; }
+      85% { opacity: .72; }
+    }
+
+    .topbar {
+      position: absolute;
+      z-index: 20;
+      inset: 0 0 auto;
+      width: 100%;
+      padding: 22px 28px;
+    }
+    .topbar-inner {
+      width: min(100%, var(--content));
+      min-height: 52px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 800; letter-spacing: -.04em; }
+    .brand-mark {
+      width: 37px; height: 37px; display: grid; place-items: center; border-radius: 13px;
+      color: var(--rose); background: rgba(255, 228, 230, .75); box-shadow: 0 5px 16px rgba(222, 132, 147, .13);
+    }
+    .brand-mark svg { width: 18px; height: 18px; fill: rgba(244, 63, 94, .16); stroke-width: 2.1; }
+    .brand-sub { color: var(--rose-dark); }
+    .nav-links { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 32px); font-size: 11px; font-weight: 700; color: #79686d; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-gift {
+      display: inline-flex; align-items: center; gap: 8px; padding: 11px 16px; border-radius: 99px;
+      background: rgba(255,255,255,.65); border: 1px solid rgba(185, 131, 114, .2); color: #8d5e60;
+      font-size: 11px; font-weight: 800; box-shadow: 0 8px 24px rgba(97, 60, 63, .05); transition: .2s ease;
+    }
+    .nav-gift:hover { transform: translateY(-2px); background: white; box-shadow: 0 10px 28px rgba(97, 60, 63, .1); }
+    .nav-gift svg { width: 14px; height: 14px; }
+
+    .hero {
+      min-height: 760px;
+      min-height: min(900px, 100svh);
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 118px 28px 78px;
+      overflow: hidden;
+    }
+    .hero::before {
+      position: absolute; content: ''; pointer-events: none; width: 700px; height: 700px; border-radius: 50%;
+      right: -255px; top: 20px; background: radial-gradient(circle, rgba(255, 231, 234, .62), rgba(255, 231, 234, 0) 70%);
+    }
+    .hero-inner {
+      width: min(100%, var(--content)); margin: 0 auto; display: grid; grid-template-columns: 1.05fr .95fr;
+      align-items: center; gap: clamp(28px, 6vw, 82px); position: relative;
+    }
+    .hero-copy { position: relative; z-index: 2; padding-bottom: 15px; }
+    .eyebrow, .section-kicker {
+      display: inline-flex; align-items: center; gap: 9px; color: #b27a79; text-transform: uppercase;
+      font-size: 10px; font-weight: 800; letter-spacing: .21em;
+    }
+    .eyebrow { padding: 9px 13px; border: 1px solid rgba(185, 131, 114, .22); border-radius: 99px; background: rgba(255,255,255,.54); }
+    .eyebrow svg { width: 14px; height: 14px; color: var(--rose); }
+    .hero h1 {
+      max-width: 650px; margin: 28px 0 20px; font-family: var(--serif); font-size: clamp(50px, 6.2vw, 80px);
+      line-height: 1.06; font-weight: 500; letter-spacing: -.052em; color: #422f35;
+    }
+    .hero h1 em { color: var(--rose); font-weight: 500; }
+    .hero-desc { max-width: 470px; margin: 0; color: #7e6d72; font-size: 14px; line-height: 1.95; }
+    .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+    .primary-button, .soft-button {
+      position: relative; overflow: hidden; isolation: isolate; display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; min-height: 52px; padding: 0 22px; border: 0; border-radius: 15px; cursor: pointer;
+      font-size: 12px; font-weight: 800; transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+    }
+    .primary-button { color: white; background: linear-gradient(135deg, #f46982, #de4c6c); box-shadow: 0 12px 28px rgba(216, 76, 104, .23); }
+    .primary-button:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(216, 76, 104, .31); }
+    .primary-button:active, .soft-button:active { transform: translateY(0) scale(.98); }
+    .primary-button svg, .soft-button svg { width: 16px; height: 16px; }
+    .soft-button { color: #79636a; background: rgba(255,255,255,.6); border: 1px solid rgba(154, 113, 119, .16); }
+    .soft-button:hover { color: var(--rose-dark); background: white; transform: translateY(-2px); }
+    .button-ripple {
+      position: absolute; z-index: -1; display: block; border-radius: 50%; transform: scale(0); pointer-events: none;
+      background: rgba(255,255,255,.42); animation: ripple .65s ease-out forwards;
+    }
+    @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+    .hero-footnote { display: flex; align-items: center; gap: 8px; margin: 22px 0 0 3px; color: #9d898c; font-size: 10px; }
+    .hero-footnote svg { width: 13px; height: 13px; color: #d08c91; }
+
+    .hero-art { position: relative; min-width: 0; display: grid; place-items: center; }
+    .art-halo {
+      position: absolute; width: min(41vw, 470px); aspect-ratio: 1; border-radius: 50%;
+      border: 1px solid rgba(202, 149, 155, .14); box-shadow: inset 0 0 70px rgba(255,255,255,.7), 0 0 70px rgba(250,210,215,.15);
+    }
+    .art-halo::before, .art-halo::after { content: ''; position: absolute; inset: 9%; border: 1px dashed rgba(202, 149, 155, .18); border-radius: 50%; }
+    .art-halo::after { inset: 20%; border-style: solid; opacity: .65; }
+    .orbit-dot { position: absolute; z-index: 4; width: 9px; height: 9px; border-radius: 50%; background: #df9da1; box-shadow: 0 0 0 6px rgba(223,157,161,.12); }
+    .orbit-dot.one { top: 18%; right: 16%; }
+    .orbit-dot.two { bottom: 21%; left: 10%; width: 6px; height: 6px; background: #c9b9e6; }
+    .floating-note {
+      position: absolute; z-index: 8; top: 15%; right: 4%; display: grid; gap: 5px; padding: 12px 15px;
+      color: #93696d; border: 1px solid rgba(255,255,255,.85); border-radius: 14px; background: rgba(255,255,255,.72);
+      box-shadow: 0 12px 28px rgba(97, 60, 63, .09); transform: rotate(5deg); backdrop-filter: blur(12px);
+    }
+    .floating-note span:first-child { font-family: var(--serif); font-size: 15px; font-style: italic; }
+    .floating-note span:last-child { font-size: 8px; font-weight: 800; letter-spacing: .16em; }
+    .tiny-flower { position: absolute; z-index: 6; width: 42px; height: 42px; color: #d9969f; opacity: .85; }
+    .tiny-flower.flower-a { top: 15%; left: 8%; transform: rotate(-16deg); }
+    .tiny-flower.flower-b { bottom: 16%; right: 10%; width: 30px; height: 30px; color: #c4b8df; transform: rotate(23deg); }
+    .envelope-scene { position: relative; z-index: 3; width: min(100%, 500px); aspect-ratio: 1.2; display: flex; align-items: flex-end; justify-content: center; perspective: 1200px; }
+    .envelope-shadow { position: absolute; width: 76%; height: 11%; left: 12%; bottom: 10%; background: rgba(144, 80, 92, .17); filter: blur(18px); border-radius: 50%; transition: .6s ease; }
+    .envelope {
+      position: absolute; left: 7%; bottom: 15%; width: 86%; height: 60%; transform-style: preserve-3d;
+      filter: drop-shadow(0 25px 26px rgba(128, 69, 81, .13));
+    }
+    .envelope-back { position: absolute; inset: 0; z-index: 1; border-radius: 19px; background: linear-gradient(145deg, #e8a0a9, #d98291); }
+    .envelope-letter {
+      position: absolute; left: 7%; bottom: 8%; z-index: 2; width: 86%; height: 96%; padding: 21px 20px;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; text-align: center;
+      border-radius: 13px; background: linear-gradient(145deg, #fffefa, #fff4ed); box-shadow: 0 4px 18px rgba(128, 69, 81, .12);
+      transform: translateY(0) rotate(0); transition: transform .9s cubic-bezier(.22,1,.36,1) .08s; color: #865f64;
+    }
+    .envelope-letter .letter-heart { width: 22px; height: 22px; color: var(--rose); fill: rgba(244,63,94,.16); }
+    .envelope-letter strong { font: italic 24px var(--serif); color: #694b51; }
+    .envelope-letter small { max-width: 215px; color: #9d8586; font-size: 9px; line-height: 1.7; }
+    .envelope-front {
+      position: absolute; inset: 0; z-index: 3; border-radius: 0 0 19px 19px;
+      clip-path: polygon(0 0, 50% 64%, 100% 0, 100% 100%, 0 100%);
+      background: linear-gradient(135deg, #f0b3b8 0%, #e59ba5 100%);
+    }
+    .envelope-flap {
+      position: absolute; top: 0; left: 0; z-index: 5; width: 100%; height: 70%;
+      clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top center; transform: rotateX(0deg);
+      backface-visibility: hidden; background: linear-gradient(155deg, #f6c3c5, #e9a1aa);
+      transition: transform .75s cubic-bezier(.2,.8,.2,1), z-index .1s .35s;
+    }
+    .envelope-seal {
+      position: absolute; z-index: 6; top: 51%; left: 50%; width: 44px; height: 44px; display: grid; place-items: center;
+      border: 1px solid rgba(255,255,255,.56); border-radius: 50%; color: white; font-size: 18px;
+      background: radial-gradient(circle at 34% 28%, #f58698, #d85570 75%); box-shadow: 0 5px 12px rgba(166, 65, 85, .2);
+      transform: translate(-50%,-50%); transition: opacity .3s ease, transform .4s ease;
+    }
+    .envelope-scene.is-open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+    .envelope-scene.is-open .envelope-letter { z-index: 4; transform: translateY(-62%) rotate(-2deg); transition-delay: .3s; }
+    .envelope-scene.is-open .envelope-seal { opacity: 0; transform: translate(-50%,-30%) scale(.55); }
+    .envelope-scene.is-open .envelope-shadow { transform: scale(1.12); opacity: .65; }
+    .envelope-caption { position: absolute; bottom: 0; margin: 0; color: #a68c8d; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+    .scroll-cue { position: absolute; bottom: 22px; left: 50%; display: flex; align-items: center; gap: 9px; color: #a18d8f; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; transform: translateX(-50%); }
+    .scroll-cue svg { width: 13px; height: 13px; animation: cue 1.5s ease-in-out infinite; }
+    @keyframes cue { 50% { transform: translateY(4px); } }
+
+    .section { position: relative; padding: clamp(82px, 10vw, 134px) 28px; }
+    .section-inner { width: min(100%, var(--content)); margin: 0 auto; }
+    .section-heading { max-width: 690px; margin: 0 auto 48px; text-align: center; }
+    .section-kicker { justify-content: center; margin-bottom: 15px; }
+    .section-kicker svg { width: 14px; height: 14px; }
+    .section-heading h2, .final-heading {
+      margin: 0; font: 500 clamp(37px, 5vw, 57px)/1.13 var(--serif); letter-spacing: -.04em; color: #47343a;
+    }
+    .section-heading h2 em, .final-heading em { color: var(--rose); font-weight: 500; }
+    .section-heading p { max-width: 505px; margin: 16px auto 0; color: var(--muted); font-size: 12px; line-height: 1.9; }
+    .glass-card {
+      border: 1px solid rgba(255,255,255,.85); background: rgba(255,255,255,.64); backdrop-filter: blur(18px);
+      box-shadow: 0 24px 70px rgba(89, 54, 59, .07), inset 0 1px 0 rgba(255,255,255,.9);
+    }
+    .wish-section { overflow: hidden; }
+    .wish-section::before { position: absolute; content: ''; width: 410px; height: 410px; right: -220px; top: 120px; border-radius: 50%; background: radial-gradient(circle,rgba(224,231,255,.55),transparent 70%); pointer-events:none; }
+    .wish-card {
+      position: relative; width: min(100%, 900px); min-height: 400px; margin: auto; padding: clamp(28px, 5.4vw, 56px);
+      display: grid; grid-template-columns: 1fr 215px; gap: 24px; align-items: center; border-radius: 32px;
+      overflow: hidden;
+    }
+    .wish-card::before { position: absolute; content: ''; width: 270px; height: 270px; top: -120px; right: 55px; border-radius: 50%; background: rgba(255, 229, 233, .55); filter: blur(3px); }
+    .wish-copy-area { position: relative; z-index: 1; }
+    .wish-topline { display: flex; align-items: center; gap: 9px; color: #b07a7a; font-size: 9px; letter-spacing: .16em; font-weight: 800; text-transform: uppercase; }
+    .wish-topline svg { width: 15px; height: 15px; color: var(--rose); }
+    .wish-card h3 { margin: 22px 0 11px; color: #67484f; font: italic 30px/1.2 var(--serif); }
+    .wish-text { max-width: 555px; min-height: 88px; margin: 0; color: #7d6b70; font-size: 13px; line-height: 2; }
+    .wish-text::after { content: '|'; display: inline-block; margin-left: 2px; color: var(--rose); font-weight: 600; animation: blink .8s steps(1) infinite; }
+    .wish-text.is-done::after { opacity: 0; animation: none; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .wish-signature { margin-top: 19px; color: #a98c8d; font-family: var(--serif); font-size: 16px; font-style: italic; }
+    .wish-illustration { position: relative; z-index: 1; width: 190px; height: 190px; justify-self: center; display: grid; place-items: center; }
+    .wish-illustration::before { position: absolute; inset: 8px; content: ''; border-radius: 50%; border: 1px solid rgba(194,143,153,.22); }
+    .wish-illustration::after { position: absolute; inset: 23px; content: ''; border-radius: 50%; border: 1px dashed rgba(194,143,153,.25); }
+    .flower-illustration { position: relative; z-index: 1; width: 106px; height: 106px; filter: drop-shadow(0 14px 14px rgba(166,105,121,.17)); animation: flowerBreathe 5s ease-in-out infinite; }
+    @keyframes flowerBreathe { 50% { transform: translateY(-6px) rotate(3deg); } }
+    .wish-orbit { position: absolute; z-index: 2; display: grid; place-items: center; width: 33px; height: 33px; border-radius: 50%; color: #bd8792; background: white; box-shadow: 0 5px 16px rgba(110,74,83,.1); }
+    .wish-orbit svg { width: 14px; height: 14px; }
+    .wish-orbit.orbit-top { top: 3px; right: 27px; }
+    .wish-orbit.orbit-left { bottom: 24px; left: 2px; width: 27px; height: 27px; color: #b3a7ce; }
+    .wish-actions { display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap; margin-top: 29px; }
+    .wish-action-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+    .wish-actions .primary-button, .wish-actions .soft-button { min-height: 44px; padding: 0 16px; border-radius: 12px; font-size: 10px; }
+    .name-editor { display: flex; align-items: center; gap: 7px; padding: 6px 7px 6px 12px; border: 1px solid rgba(185,131,114,.16); border-radius: 99px; background: rgba(255,255,255,.72); }
+    .name-editor label { color: #a18b8d; font-size: 9px; white-space: nowrap; }
+    .name-editor input { width: 72px; padding: 5px 0; border: 0; outline: 0; background: transparent; color: #70545a; font-size: 10px; font-weight: 700; }
+    .name-editor input:focus-visible { outline: 0; }
+    .name-editor button { width: 27px; height: 27px; display: grid; place-items: center; border: 0; border-radius: 50%; color: white; background: #e77b8d; cursor: pointer; transition: .2s; }
+    .name-editor button:hover { transform: rotate(-8deg) scale(1.06); background: var(--rose); }
+    .name-editor button svg { width: 13px; height: 13px; }
+
+    .gallery-section { background: linear-gradient(180deg, rgba(255,248,246,.15), rgba(255,243,244,.58) 46%, rgba(255,248,246,.15)); overflow: hidden; }
+    .gallery-section::before, .gallery-section::after { position:absolute; content:''; width:400px; height:400px; border-radius:50%; pointer-events:none; }
+    .gallery-section::before { left:-260px; top:20%; background:radial-gradient(circle,rgba(255,218,224,.44),transparent 68%); }
+    .gallery-section::after { right:-260px; bottom:0; background:radial-gradient(circle,rgba(224,231,255,.56),transparent 68%); }
+    .gallery-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 23px; }
+    .gallery-head .section-heading { margin: 0; text-align: left; }
+    .gallery-head .section-kicker { justify-content: flex-start; }
+    .gallery-head .section-heading p { margin-left: 0; }
+    .gallery-controls { display: flex; gap: 9px; padding-bottom: 5px; }
+    .round-control { width: 43px; height: 43px; display: grid; place-items: center; border: 1px solid rgba(180, 127, 133, .2); border-radius: 50%; color: #946d72; background: rgba(255,255,255,.76); cursor: pointer; transition: .2s; box-shadow: 0 5px 16px rgba(98,65,68,.06); }
+    .round-control:hover { transform: translateY(-2px); color: white; border-color: var(--rose); background: var(--rose); }
+    .round-control svg { width: 16px; height: 16px; }
+    .gallery-track { position: relative; z-index: 1; display: flex; align-items: center; gap: clamp(18px, 3vw, 32px); overflow: auto hidden; padding: 27px 8px 43px; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+    .gallery-track::-webkit-scrollbar { display: none; }
+    .memory-card { flex: 0 0 clamp(250px, 28vw, 310px); height: 390px; scroll-snap-align: center; perspective: 900px; }
+    .polaroid {
+      --tilt: 0deg; width: 100%; height: 100%; padding: 12px 12px 18px; border: 1px solid rgba(149,100,107,.07); border-radius: 5px;
+      background: #fff; box-shadow: 0 18px 40px rgba(76,47,50,.13); transform: rotate(var(--tilt)); transition: transform .38s cubic-bezier(.2,.75,.25,1), box-shadow .38s ease; will-change: transform;
+    }
+    .memory-card:nth-child(1) { --tilt: -2.7deg; }
+    .memory-card:nth-child(2) { --tilt: 2deg; }
+    .memory-card:nth-child(3) { --tilt: -1.3deg; }
+    .memory-card:nth-child(4) { --tilt: 2.6deg; }
+    .polaroid:hover { transform: translateY(-8px) rotate(0deg) scale(1.015); box-shadow: 0 27px 48px rgba(76,47,50,.19); }
+    .polaroid-image { height: 300px; overflow: hidden; background: linear-gradient(135deg,#f5cbd0,#e8e7fa); }
+    .polaroid-image img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .65s cubic-bezier(.2,.75,.25,1), filter .5s; filter: saturate(.88); }
+    .polaroid:hover .polaroid-image img { transform: scale(1.06); filter: saturate(1.05); }
+    .polaroid-caption { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 55px; padding: 11px 5px 0; color: #765b5e; font: italic 15px var(--serif); }
+    .polaroid-caption span { color: #c48991; font: 9px var(--sans); letter-spacing: .1em; white-space: nowrap; }
+    .gallery-footnote { position: relative; z-index: 1; margin: -12px 0 0; color: #a38f91; text-align: center; font-size: 9px; letter-spacing: .07em; }
+
+    .special-section { overflow: hidden; }
+    .special-section::after { position:absolute; z-index:-1; content:''; top:18%; right:-180px; width:390px; height:390px; border-radius:50%; background:radial-gradient(circle,rgba(234,230,255,.58),transparent 70%); }
+    .compliment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .flip-card {
+      min-height: 250px; padding: 0; border: 0; border-radius: 22px; background: transparent; cursor: pointer; perspective: 1100px; text-align: left;
+    }
+    .flip-inner { position: relative; display: block; min-height: 250px; transform-style: preserve-3d; transition: transform .75s cubic-bezier(.2,.72,.2,1); }
+    .flip-card.is-flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-face {
+      position: absolute; inset: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between;
+      overflow: hidden; padding: 24px; border: 1px solid rgba(255,255,255,.9); border-radius: 22px; backface-visibility: hidden;
+      box-shadow: 0 15px 35px rgba(84, 58, 72, .075);
+    }
+    @media (hover:hover) and (pointer:fine) { .flip-card:hover .flip-inner { transform: rotateY(180deg); } }
+    .flip-front { background: linear-gradient(135deg,rgba(255,255,255,.9),rgba(255,242,241,.82)); }
+    .flip-card:nth-child(2) .flip-front, .flip-card:nth-child(5) .flip-front { background: linear-gradient(135deg,rgba(255,255,255,.9),rgba(239,238,255,.88)); }
+    .flip-card:nth-child(3) .flip-front, .flip-card:nth-child(6) .flip-front { background: linear-gradient(135deg,rgba(255,255,255,.94),rgba(255,246,226,.8)); }
+    .flip-back { transform: rotateY(180deg); align-items: center; justify-content: center; text-align: center; background: linear-gradient(145deg,#f6d6d9,#f8e7e5); color: #73545a; }
+    .flip-card:nth-child(2) .flip-back, .flip-card:nth-child(5) .flip-back { background: linear-gradient(145deg,#e3e1fc,#f1eaff); }
+    .flip-card:nth-child(3) .flip-back, .flip-card:nth-child(6) .flip-back { background: linear-gradient(145deg,#f8e6c7,#faeee4); }
+    .card-number { color: #b79a9b; font-size: 9px; font-weight: 800; letter-spacing: .16em; }
+    .card-icon { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 19px; color: #d7657b; background: rgba(255,255,255,.72); box-shadow: 0 8px 20px rgba(103,68,80,.08); }
+    .card-icon svg { width: 26px; height: 26px; stroke-width: 1.5; }
+    .flip-title { max-width: 190px; color: #674e54; font: 500 21px/1.25 var(--serif); }
+    .flip-hint { display: inline-flex; align-items: center; gap: 6px; color: #a78c90; font-size: 9px; }
+    .flip-hint svg { width: 12px; height: 12px; }
+    .flip-back .back-heart { width: 25px; height: 25px; margin-bottom: 13px; color: #e56f82; fill: rgba(229,111,130,.12); }
+    .flip-back strong { max-width: 220px; font: italic 23px/1.25 var(--serif); }
+    .flip-back p { max-width: 225px; margin: 11px 0 0; color: #8a6d72; font-size: 10px; line-height: 1.75; }
+    .flip-back .sparkle-mark { position:absolute; top:21px; right:22px; width:17px; height:17px; opacity:.55; }
+
+    .final-section { padding-top: 70px; padding-bottom: 100px; }
+    .final-panel {
+      position: relative; overflow: hidden; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 30px;
+      min-height: 360px; padding: clamp(29px, 6vw, 65px); border: 1px solid rgba(255,255,255,.8); border-radius: 34px;
+      background: linear-gradient(120deg,rgba(255,237,237,.91),rgba(255,249,241,.96) 52%,rgba(238,237,255,.91));
+      box-shadow: 0 24px 70px rgba(101,66,73,.08);
+    }
+    .final-panel::before, .final-panel::after { position:absolute; content:''; border-radius:50%; pointer-events:none; }
+    .final-panel::before { width:320px; height:320px; top:-200px; left:34%; border:1px solid rgba(205,151,161,.22); box-shadow: 0 0 0 24px rgba(255,255,255,.14), 0 0 0 50px rgba(255,255,255,.1); }
+    .final-panel::after { width:250px; height:250px; right:-130px; bottom:-145px; background:rgba(255,255,255,.38); }
+    .countdown-area, .final-message { position:relative; z-index:1; }
+    .counter-label { display: inline-flex; align-items: center; gap: 8px; color: #ae7c7e; font-size: 9px; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
+    .counter-label svg { width: 14px; height: 14px; color: var(--rose); }
+    .final-heading { margin-top: 17px; font-size: clamp(32px, 4vw, 45px); }
+    .final-heading em { display: block; }
+    .counter-note { margin: 14px 0 0; color: #8c777c; font-size: 10px; line-height: 1.8; }
+    .countdown { display: flex; align-items: center; gap: 9px; margin-top: 23px; }
+    .count-unit { min-width: 58px; padding: 11px 9px 9px; border: 1px solid rgba(255,255,255,.82); border-radius: 13px; background: rgba(255,255,255,.59); text-align: center; box-shadow: 0 7px 17px rgba(97,61,66,.05); }
+    .count-unit strong { display:block; color:#79565c; font: 600 21px/1 var(--serif); font-variant-numeric: tabular-nums; }
+    .count-unit span { display:block; margin-top:6px; color:#ae8f91; font-size:7px; font-weight:800; letter-spacing:.11em; text-transform:uppercase; }
+    .count-separator { margin-top:-14px; color:#cc9aa0; font: italic 20px var(--serif); }
+    .final-message { justify-self: end; max-width: 335px; padding: 27px; border: 1px solid rgba(255,255,255,.83); border-radius: 24px; background: rgba(255,255,255,.53); backdrop-filter: blur(12px); box-shadow: 0 16px 36px rgba(94,66,72,.07); }
+    .final-message .quote-mark { width: 25px; height: 25px; color: #d98a96; fill: rgba(217,138,150,.13); }
+    .final-message p { margin: 12px 0 20px; color: #806b71; font: italic 17px/1.65 var(--serif); }
+    .final-message .primary-button { width: 100%; min-height: 49px; padding: 0 14px; font-size: 10px; }
+    .final-message small { display: block; margin-top: 12px; color: #aa9295; text-align: center; font-size: 8px; }
+
+    .footer { padding: 0 28px 32px; color: #a28d91; text-align: center; font-size: 9px; }
+    .footer-inner { width: min(100%, var(--content)); margin: 0 auto; padding-top: 23px; border-top: 1px solid rgba(149,111,117,.13); }
+    .footer-heart { display:inline-block; margin: 0 3px; color: var(--rose); animation: heartBeat 1.4s ease-in-out infinite; }
+    @keyframes heartBeat { 0%,100% { transform:scale(1); } 20% { transform:scale(1.2); } 35% { transform:scale(1); } 50% { transform:scale(1.12); } }
+
+    .music-player {
+      position: fixed; z-index: 40; left: 20px; bottom: 20px; width: 255px; min-height: 67px; padding: 9px 13px 9px 10px;
+      display: flex; align-items: center; gap: 11px; border: 1px solid rgba(255,255,255,.86); border-radius: 19px;
+      background: rgba(255,253,249,.83); backdrop-filter: blur(16px); box-shadow: 0 13px 34px rgba(78,50,56,.12);
+    }
+    .music-disc-wrap { position: relative; flex: 0 0 43px; width: 43px; height: 43px; display:grid; place-items:center; border-radius:50%; background:linear-gradient(145deg,#f8dadd,#eadffa); }
+    .music-disc { width: 31px; height: 31px; display:grid; place-items:center; border: 2px solid rgba(255,255,255,.7); border-radius:50%; color:#fff; background:linear-gradient(145deg,#dd7887,#b685af); box-shadow:0 2px 8px rgba(92,53,71,.2); }
+    .music-disc svg { width: 13px; height:13px; fill:rgba(255,255,255,.2); }
+    .music-player.is-playing .music-disc { animation: spin 4s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .music-meta { flex: 1; min-width: 0; }
+    .music-title { display:block; overflow:hidden; color:#71565d; font-size:9px; font-weight:800; text-overflow:ellipsis; white-space:nowrap; }
+    .music-subtitle { display:flex; align-items:center; gap:5px; margin-top:5px; color:#a58c90; font-size:7px; letter-spacing:.04em; }
+    .visualizer { height:12px; display:flex; align-items:center; gap:2px; }
+    .visualizer i { display:block; width:2px; height:3px; border-radius:3px; background:#d78390; }
+    .music-player.is-playing .visualizer i { animation: equalize .55s ease-in-out infinite alternate; }
+    .visualizer i:nth-child(2) { animation-delay:.1s; }
+    .visualizer i:nth-child(3) { animation-delay:.27s; }
+    .visualizer i:nth-child(4) { animation-delay:.17s; }
+    .visualizer i:nth-child(5) { animation-delay:.36s; }
+    @keyframes equalize { to { height:12px; } }
+    .music-toggle { flex:0 0 35px; width:35px; height:35px; display:grid; place-items:center; border:0; border-radius:50%; color:white; background:#e36e83; box-shadow:0 5px 11px rgba(211,92,113,.22); cursor:pointer; transition:.2s; }
+    .music-toggle:hover { transform:scale(1.07); background:var(--rose); }
+    .music-toggle:disabled { opacity:.58; cursor:wait; }
+    .music-toggle svg { width:14px; height:14px; fill:currentColor; }
+    #backgroundAudio { display:none; }
+
+    .message-dialog { width:min(92vw, 465px); max-width:none; max-height:calc(100dvh - 36px); padding:0; border:1px solid rgba(255,255,255,.9); border-radius:28px; color:var(--ink); background:transparent; box-shadow:0 28px 90px rgba(65,39,48,.25); overflow:visible; }
+    .message-dialog::backdrop { background:rgba(53,38,45,.35); backdrop-filter:blur(7px); }
+    .dialog-card { position:relative; padding:31px; border-radius:27px; background:linear-gradient(145deg,#fffdfa,#fff3f2 58%,#f4f2ff); }
+    .dialog-close { position:absolute; top:17px; right:17px; width:33px; height:33px; display:grid; place-items:center; border:1px solid rgba(141,100,108,.14); border-radius:50%; color:#8e777d; background:rgba(255,255,255,.7); cursor:pointer; }
+    .dialog-close svg { width:15px; height:15px; }
+    .dialog-icon { width:46px; height:46px; display:grid; place-items:center; border-radius:16px; color:var(--rose); background:rgba(255,228,230,.75); }
+    .dialog-icon svg { width:22px; height:22px; fill:rgba(244,63,94,.13); }
+    .dialog-card h2 { margin:19px 0 8px; font:500 30px/1.15 var(--serif); color:#513940; }
+    .dialog-card > p { margin:0 0 18px; color:#8b777c; font-size:11px; line-height:1.8; }
+    .dialog-card textarea { display:block; width:100%; min-height:116px; resize:vertical; padding:14px; border:1px solid rgba(171,124,132,.2); border-radius:15px; outline:none; color:#70555c; background:rgba(255,255,255,.78); font-size:11px; line-height:1.8; }
+    .dialog-card textarea:focus { border-color:rgba(244,63,94,.48); box-shadow:0 0 0 4px rgba(244,63,94,.08); }
+    .dialog-actions { display:flex; flex-direction:column; gap:8px; margin-top:14px; }
+    .dialog-actions .primary-button { width:100%; min-height:47px; font-size:10px; }
+    .dialog-later { width:100%; min-height:40px; border:0; border-radius:12px; color:#9c8589; background:transparent; cursor:pointer; font-size:10px; font-weight:700; }
+    .dialog-later:hover { color:var(--rose-dark); background:rgba(255,255,255,.5); }
+    .toast {
+      position:fixed; z-index:70; left:50%; bottom:105px; max-width:min(90vw,390px); padding:12px 17px; border:1px solid rgba(255,255,255,.84);
+      border-radius:14px; color:#fff; background:rgba(87,60,68,.92); box-shadow:0 10px 30px rgba(62,43,49,.2); font-size:10px; line-height:1.5;
+      opacity:0; transform:translate(-50%, 12px); pointer-events:none; transition:opacity .25s ease,transform .25s ease; text-align:center;
+    }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    .burst-heart { position:fixed; z-index:65; pointer-events:none; color:#ec7185; font-size:var(--size,20px); text-shadow:0 3px 12px rgba(211,76,104,.28); animation:heartBurst var(--duration,1.8s) cubic-bezier(.16,.75,.28,1) forwards; }
+    @keyframes heartBurst { 0% { opacity:0; transform:translate(-50%,-50%) scale(.25) rotate(0); } 12% { opacity:1; } 100% { opacity:0; transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(var(--scale,.8)) rotate(var(--rot,35deg)); } }
+
+    .reveal { opacity:0; transform:translateY(23px); transition:opacity .75s ease,transform .75s cubic-bezier(.2,.7,.2,1); }
+    .reveal.is-visible { opacity:1; transform:translateY(0); }
+    .reveal-delay-1 { transition-delay:.1s; }
+    .reveal-delay-2 { transition-delay:.18s; }
+    .reveal-delay-3 { transition-delay:.26s; }
+
+    @media (max-width: 900px) {
+      .hero { min-height: 760px; }
+      .hero-inner { gap: 28px; }
+      .hero h1 { font-size: clamp(48px, 7vw, 67px); }
+      .art-halo { width: min(48vw, 420px); }
+      .floating-note { right:0; }
+      .wish-card { grid-template-columns: 1fr 160px; }
+      .wish-illustration { width:160px; height:160px; }
+      .flower-illustration { width:90px; height:90px; }
+      .compliment-grid { gap:13px; }
+      .flip-face { padding:20px; }
+      .final-panel { gap:22px; }
+      .final-message { padding:22px; }
+    }
+    @media (max-width: 700px) {
+      html { scroll-padding-top: 75px; }
+      .topbar { padding:14px 18px; }
+      .topbar-inner { min-height:44px; }
+      .brand { font-size:12px; }
+      .brand-mark { width:34px; height:34px; border-radius:12px; }
+      .nav-links { display:none; }
+      .nav-gift { padding:10px 13px; font-size:10px; }
+      .hero { min-height:unset; padding:102px 22px 86px; }
+      .hero-inner { grid-template-columns:1fr; gap:20px; }
+      .hero-copy { text-align:center; padding-bottom:0; }
+      .hero h1 { max-width:570px; margin:23px auto 15px; font-size:clamp(46px, 11.7vw, 68px); }
+      .hero-desc { max-width:440px; margin:auto; font-size:12px; }
+      .hero-actions { justify-content:center; margin-top:24px; gap:10px; }
+      .primary-button, .soft-button { min-height:48px; padding:0 17px; border-radius:14px; font-size:10px; }
+      .hero-footnote { justify-content:center; margin-top:16px; font-size:9px; }
+      .hero-art { min-height:300px; margin-top:2px; }
+      .art-halo { width:min(82vw,390px); }
+      .envelope-scene { width:min(100%,420px); }
+      .floating-note { top:6%; right:5%; padding:10px 12px; }
+      .tiny-flower.flower-a { top:10%; left:8%; }
+      .tiny-flower.flower-b { bottom:12%; right:7%; }
+      .scroll-cue { bottom:18px; }
+      .section { padding:82px 20px; }
+      .section-heading { margin-bottom:33px; }
+      .section-heading h2 { font-size:clamp(36px, 9vw, 48px); }
+      .section-heading p { font-size:11px; }
+      .wish-card { grid-template-columns:1fr; min-height:auto; padding:27px 22px; border-radius:25px; }
+      .wish-card h3 { margin-top:18px; font-size:28px; }
+      .wish-text { min-height:112px; font-size:12px; }
+      .wish-illustration { position:absolute; top:18px; right:12px; width:92px; height:92px; opacity:.62; }
+      .wish-illustration::before { inset:4px; }
+      .wish-illustration::after { inset:13px; }
+      .flower-illustration { width:52px; height:52px; }
+      .wish-orbit { width:22px; height:22px; }
+      .wish-orbit svg { width:11px; height:11px; }
+      .wish-orbit.orbit-top { top:0; right:17px; }
+      .wish-orbit.orbit-left { bottom:13px; left:0; width:20px; height:20px; }
+      .wish-actions { align-items:flex-start; flex-direction:column; margin-top:22px; }
+      .wish-action-buttons { width:100%; }
+      .wish-action-buttons .primary-button, .wish-action-buttons .soft-button { flex:1; padding:0 10px; font-size:9px; }
+      .name-editor { align-self:flex-start; }
+      .gallery-head { align-items:flex-end; }
+      .gallery-head .section-heading h2 { font-size:clamp(34px, 8vw, 44px); }
+      .gallery-head .section-heading p { max-width:330px; }
+      .gallery-controls { gap:6px; }
+      .round-control { width:37px; height:37px; }
+      .memory-card { flex-basis: min(75vw, 286px); height:370px; }
+      .polaroid-image { height:282px; }
+      .polaroid-caption { font-size:14px; }
+      .compliment-grid { grid-template-columns:repeat(2, minmax(0,1fr)); gap:11px; }
+      .flip-card, .flip-inner { min-height:220px; }
+      .flip-face { padding:17px 15px; border-radius:19px; }
+      .flip-title { font-size:18px; }
+      .card-icon { width:48px; height:48px; border-radius:16px; }
+      .card-icon svg { width:22px; height:22px; }
+      .flip-back strong { font-size:19px; }
+      .flip-back p { font-size:9px; }
+      .final-section { padding-top:25px; padding-bottom:80px; }
+      .final-panel { grid-template-columns:1fr; gap:27px; padding:28px 22px; border-radius:27px; }
+      .final-heading { font-size:38px; }
+      .counter-note { max-width:360px; }
+      .countdown { gap:7px; }
+      .count-unit { min-width:54px; padding:10px 7px 8px; }
+      .count-unit strong { font-size:20px; }
+      .final-message { justify-self:stretch; max-width:none; padding:22px; }
+      .final-message p { font-size:16px; }
+      .footer { padding:0 18px 24px; }
+      .music-player { left:12px; bottom:12px; width:230px; min-height:59px; padding:7px 10px; gap:9px; border-radius:17px; }
+      .music-disc-wrap { width:39px; height:39px; flex-basis:39px; }
+      .music-disc { width:29px; height:29px; }
+      .music-toggle { width:32px; height:32px; flex-basis:32px; }
+      .toast { bottom:88px; }
+    }
+    @media (max-width: 390px) {
+      .topbar { padding-inline:14px; }
+      .brand { gap:7px; font-size:11px; }
+      .nav-gift { padding:9px 10px; font-size:9px; }
+      .hero { padding-inline:17px; }
+      .hero h1 { font-size:46px; }
+      .hero-actions { gap:8px; }
+      .primary-button, .soft-button { padding:0 13px; font-size:9px; }
+      .section { padding-inline:17px; }
+      .wish-card { padding:24px 17px; }
+      .gallery-head { gap:8px; }
+      .gallery-head .section-heading p { font-size:10px; }
+      .gallery-controls { gap:4px; }
+      .round-control { width:33px; height:33px; }
+      .flip-card, .flip-inner { min-height:205px; }
+      .flip-face { padding:14px 12px; }
+      .flip-title { font-size:16px; }
+      .card-icon { width:43px; height:43px; }
+      .final-panel { padding:25px 17px; }
+      .count-unit { min-width:49px; }
+      .music-player { width:219px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+      .reveal { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+<body class="bg-cream text-[#47343A] antialiased">
+  <div class="page-shell">
+    <div id="sparkleLayer" aria-hidden="true"></div>
+    <span class="ambient-orb" style="left:-210px; top:740px" aria-hidden="true"></span>
+
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="#top" aria-label="Về đầu trang">
+          <span class="brand-mark"><i data-lucide="heart"></i></span>
+          <span>gửi một chút <span class="brand-sub">yêu thương</span></span>
+        </a>
+        <nav class="nav-links" aria-label="Điều hướng chính">
+          <a href="#wish">Lời chúc</a>
+          <a href="#gallery">Kỷ niệm</a>
+          <a href="#special">Điều đặc biệt</a>
+        </nav>
+        <a class="nav-gift" href="#surprise"><i data-lucide="sparkles"></i> Món quà 20/10</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <div class="eyebrow"><i data-lucide="flower-2"></i> 20 tháng 10 · ngày của em</div>
+            <h1>Hôm nay, thế giới dịu dàng hơn <em>vì có <span class="recipient-name">em</span>.</em></h1>
+            <p class="hero-desc">Một món quà nho nhỏ, gói bằng thật nhiều yêu thương — dành cho người luôn làm những ngày bình thường trở nên thật đẹp.</p>
+            <div class="hero-actions">
+              <button class="primary-button ripple" id="openGift" type="button">Bấm vào đây để nhận quà <i data-lucide="mail-heart"></i></button>
+              <a class="soft-button" href="#wish">Khám phá món quà <i data-lucide="arrow-down-right"></i></a>
+            </div>
+            <p class="hero-footnote"><i data-lucide="heart-handshake"></i> Được chuẩn bị riêng cho một người thật đặc biệt</p>
+          </div>
+
+          <div class="hero-art" aria-label="Phong thư chúc mừng 20 tháng 10">
+            <div class="art-halo" aria-hidden="true"></div>
+            <span class="orbit-dot one" aria-hidden="true"></span><span class="orbit-dot two" aria-hidden="true"></span>
+            <i class="tiny-flower flower-a" data-lucide="flower-2" aria-hidden="true"></i>
+            <i class="tiny-flower flower-b" data-lucide="sparkles" aria-hidden="true"></i>
+            <div class="floating-note" aria-hidden="true"><span>just for you</span><span>LOVE · 20.10</span></div>
+            <div class="envelope-scene" id="envelopeScene">
+              <div class="envelope-shadow"></div>
+              <div class="envelope">
+                <div class="envelope-back"></div>
+                <div class="envelope-letter" id="envelopeLetter">
+                  <i class="letter-heart" data-lucide="heart"></i>
+                  <strong><span class="recipient-name">Em</span> à,</strong>
+                  <small>Chúc em luôn xinh đẹp, bình yên và được yêu thương theo cách em xứng đáng.</small>
+                </div>
+                <div class="envelope-front"></div>
+                <div class="envelope-flap"></div>
+                <div class="envelope-seal" aria-hidden="true">♥</div>
+              </div>
+              <p class="envelope-caption">Một chiếc thư nhỏ đang chờ được mở</p>
+            </div>
+          </div>
+        </div>
+        <a href="#wish" class="scroll-cue"><span>kéo xuống để khám phá</span><i data-lucide="arrow-down"></i></a>
+      </section>
+
+      <section class="section wish-section" id="wish">
+        <div class="section-inner">
+          <div class="section-heading reveal">
+            <span class="section-kicker"><i data-lucide="sparkles"></i> Một lời nhắn dành riêng cho em</span>
+            <h2>Điều muốn nói, <em>từ trái tim.</em></h2>
+            <p>Vì có những điều ngọt ngào nên được nói ra — không chỉ hôm nay, mà bất cứ khi nào em cần nghe.</p>
+          </div>
+          <article class="wish-card glass-card reveal reveal-delay-1">
+            <div class="wish-copy-area">
+              <div class="wish-topline"><i data-lucide="heart"></i> một tấm thiệp nhỏ · 20.10</div>
+              <h3>Thân gửi <span class="recipient-name">em</span>,</h3>
+              <p class="wish-text" id="wishText" aria-live="polite"></p>
+              <div class="wish-signature">Thương mến, người luôn mong em hạnh phúc ♡</div>
+              <div class="wish-actions">
+                <div class="wish-action-buttons">
+                  <button class="primary-button ripple" id="changeWish" type="button"><i data-lucide="shuffle"></i> Đổi lời chúc</button>
+                  <button class="soft-button ripple" id="sendWish" type="button"><i data-lucide="send"></i> Gửi yêu thương</button>
+                </div>
+                <div class="name-editor">
+                  <label for="recipientInput">Viết thiệp cho</label>
+                  <input id="recipientInput" type="text" maxlength="18" value="em" autocomplete="off" aria-label="Tên người nhận lời chúc" />
+                  <button id="saveName" type="button" aria-label="Lưu tên người nhận"><i data-lucide="check"></i></button>
+                </div>
+              </div>
+            </div>
+            <div class="wish-illustration" aria-hidden="true">
+              <svg class="flower-illustration" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M59 64c-2 18-5 29-14 43m14-39c10 12 18 19 32 23" stroke="#85A78C" stroke-width="3" stroke-linecap="round"/>
+                <path d="M51 91c-10-9-21-8-28-5 5 11 15 17 27 14M68 79c12-11 23-9 31-5-7 12-17 17-29 14" fill="#B4C9AD" stroke="#86A78C" stroke-width="2" stroke-linejoin="round"/>
+                <g fill="#F6C8CD" stroke="#E8A0AC" stroke-width="1.4">
+                  <ellipse cx="59" cy="31" rx="11" ry="20"/><ellipse cx="59" cy="31" rx="11" ry="20" transform="rotate(60 59 31)"/><ellipse cx="59" cy="31" rx="11" ry="20" transform="rotate(120 59 31)"/>
+                </g>
+                <circle cx="59" cy="31" r="8" fill="#E5B76F"/><circle cx="56" cy="28" r="1.5" fill="#FFF1C7"/>
+                <g fill="#EFC3CF" opacity=".9"><circle cx="28" cy="34" r="3"/><circle cx="89" cy="47" r="2.5"/><circle cx="36" cy="62" r="2"/></g>
+              </svg>
+              <span class="wish-orbit orbit-top"><i data-lucide="sparkles"></i></span>
+              <span class="wish-orbit orbit-left"><i data-lucide="heart"></i></span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section gallery-section" id="gallery">
+        <div class="section-inner">
+          <div class="gallery-head reveal">
+            <div class="section-heading">
+              <span class="section-kicker"><i data-lucide="image"></i> Những điều bé xinh</span>
+              <h2>Khoảnh khắc <em>đáng nhớ.</em></h2>
+              <p>Mỗi ngày đều có thể trở thành một kỷ niệm đẹp — chỉ cần em ở đó, với nụ cười của mình.</p>
+            </div>
+            <div class="gallery-controls" aria-label="Điều khiển bộ sưu tập ảnh">
+              <button class="round-control" id="galleryPrev" type="button" aria-label="Ảnh trước"><i data-lucide="arrow-left"></i></button>
+              <button class="round-control" id="galleryNext" type="button" aria-label="Ảnh tiếp theo"><i data-lucide="arrow-right"></i></button>
+            </div>
+          </div>
+          <div class="gallery-track reveal reveal-delay-1" id="galleryTrack" tabindex="0" aria-label="Bộ sưu tập những khoảnh khắc đáng yêu">
+            <figure class="memory-card">
+              <div class="polaroid" data-tilt>
+                <div class="polaroid-image"><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85" alt="Bó hoa pastel trong ánh sáng dịu" loading="lazy" /></div>
+                <figcaption class="polaroid-caption">Một ngày đầy hoa <span>20 · 10</span></figcaption>
+              </div>
+            </figure>
+            <figure class="memory-card">
+              <div class="polaroid" data-tilt>
+                <div class="polaroid-image"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=900&q=85" alt="Những người bạn cùng sẻ chia niềm vui" loading="lazy" /></div>
+                <figcaption class="polaroid-caption">Bên nhau là vui <span>♡</span></figcaption>
+              </div>
+            </figure>
+            <figure class="memory-card">
+              <div class="polaroid" data-tilt>
+                <div class="polaroid-image"><img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=900&q=85" alt="Buổi chiều ấm áp cùng những người thương" loading="lazy" /></div>
+                <figcaption class="polaroid-caption">Những chiều thật êm <span>♡</span></figcaption>
+              </div>
+            </figure>
+            <figure class="memory-card">
+              <div class="polaroid" data-tilt>
+                <div class="polaroid-image"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=900&q=85" alt="Hai bàn tay nắm lấy nhau trong ánh nắng" loading="lazy" /></div>
+                <figcaption class="polaroid-caption">Có nhau, thật dịu dàng <span>♡</span></figcaption>
+              </div>
+            </figure>
+          </div>
+          <p class="gallery-footnote reveal">Kéo ngang để xem thêm · Rê chuột lên ảnh để cảm nhận chút phép màu</p>
+        </div>
+      </section>
+
+      <section class="section special-section" id="special">
+        <div class="section-inner">
+          <div class="section-heading reveal">
+            <span class="section-kicker"><i data-lucide="sparkles"></i> Bật mí một chút nhé</span>
+            <h2>Điều làm <em><span class="recipient-name">em</span> thật đặc biệt.</em></h2>
+            <p>Chạm vào từng tấm thẻ để mở ra vài điều người thương luôn muốn nói với em.</p>
+          </div>
+          <div class="compliment-grid">
+            <button class="flip-card reveal" type="button" aria-pressed="false" aria-label="Mở lời khen số một">
+              <span class="flip-inner">
+                <span class="flip-face flip-front"><span class="card-number">LỜI KHEN · 01</span><span class="card-icon"><i data-lucide="sun"></i></span><span class="flip-title">Chạm để khám phá</span><span class="flip-hint"><i data-lucide="mouse-pointer-2"></i> Mở bí mật nhỏ</span></span>
+                <span class="flip-face flip-back"><i class="back-heart" data-lucide="heart"></i><strong>Nụ cười tỏa nắng</strong><p>Chỉ cần em cười thôi, những ngày nhiều mây cũng hóa trong veo.</p><i class="sparkle-mark" data-lucide="sparkles"></i></span>
+              </span>
+            </button>
+            <button class="flip-card reveal reveal-delay-1" type="button" aria-pressed="false" aria-label="Mở lời khen số hai">
+              <span class="flip-inner">
+                <span class="flip-face flip-front"><span class="card-number">LỜI KHEN · 02</span><span class="card-icon"><i data-lucide="ear"></i></span><span class="flip-title">Chạm để khám phá</span><span class="flip-hint"><i data-lucide="mouse-pointer-2"></i> Mở bí mật nhỏ</span></span>
+                <span class="flip-face flip-back"><i class="back-heart" data-lucide="heart"></i><strong>Trái tim biết lắng nghe</strong><p>Em khiến người bên cạnh cảm thấy mình luôn được thấu hiểu.</p><i class="sparkle-mark" data-lucide="sparkles"></i></span>
+              </span>
+            </button>
+            <button class="flip-card reveal reveal-delay-2" type="button" aria-pressed="false" aria-label="Mở lời khen số ba">
+              <span class="flip-inner">
+                <span class="flip-face flip-front"><span class="card-number">LỜI KHEN · 03</span><span class="card-icon"><i data-lucide="lightbulb"></i></span><span class="flip-title">Chạm để khám phá</span><span class="flip-hint"><i data-lucide="mouse-pointer-2"></i> Mở bí mật nhỏ</span></span>
+                <span class="flip-face flip-back"><i class="back-heart" data-lucide="heart"></i><strong>Thông minh & đầy bản lĩnh</strong><p>Cách em kiên trì với điều mình tin luôn khiến người khác ngưỡng mộ.</p><i class="sparkle-mark" data-lucide="sparkles"></i></span>
+              </span>
+            </button>
+            <button class="flip-card reveal" type="button" aria-pressed="false" aria-label="Mở lời khen số bốn">
+              <span class="flip-inner">
+                <span class="flip-face flip-front"><span class="card-number">LỜI KHEN · 04</span><span class="card-icon"><i data-lucide="flower-2"></i></span><span class="flip-title">Chạm để khám phá</span><span class="flip-hint"><i data-lucide="mouse-pointer-2"></i> Mở bí mật nhỏ</span></span>
+                <span class="flip-face flip-back"><i class="back-heart" data-lucide="heart"></i><strong>Đẹp theo cách của riêng em</strong><p>Một vẻ đẹp dịu dàng, chân thật — càng nhìn càng thấy thương.</p><i class="sparkle-mark" data-lucide="sparkles"></i></span>
+              </span>
+            </button>
+            <button class="flip-card reveal reveal-delay-1" type="button" aria-pressed="false" aria-label="Mở lời khen số năm">
+              <span class="flip-inner">
+                <span class="flip-face flip-front"><span class="card-number">LỜI KHEN · 05</span><span class="card-icon"><i data-lucide="hand-heart"></i></span><span class="flip-title">Chạm để khám phá</span><span class="flip-hint"><i data-lucide="mouse-pointer-2"></i> Mở bí mật nhỏ</span></span>
+                <span class="flip-face flip-back"><i class="back-heart" data-lucide="heart"></i><strong>Luôn ấm áp và tử tế</strong><p>Sự dịu dàng của em là món quà quý giá với những người em yêu thương.</p><i class="sparkle-mark" data-lucide="sparkles"></i></span>
+              </span>
+            </button>
+            <button class="flip-card reveal reveal-delay-2" type="button" aria-pressed="false" aria-label="Mở lời khen số sáu">
+              <span class="flip-inner">
+                <span class="flip-face flip-front"><span class="card-number">LỜI KHEN · 06</span><span class="card-icon"><i data-lucide="star"></i></span><span class="flip-title">Chạm để khám phá</span><span class="flip-hint"><i data-lucide="mouse-pointer-2"></i> Mở bí mật nhỏ</span></span>
+                <span class="flip-face flip-back"><i class="back-heart" data-lucide="heart"></i><strong>Không thể thay thế</strong><p>Trên thế giới này chỉ có một em — và đó đã là điều kỳ diệu nhất.</p><i class="sparkle-mark" data-lucide="sparkles"></i></span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section final-section" id="surprise">
+        <div class="section-inner">
+          <div class="final-panel reveal">
+            <div class="countdown-area">
+              <span class="counter-label"><i data-lucide="calendar-heart"></i> Một chiếc hẹn nho nhỏ</span>
+              <h2 class="final-heading">Đếm đến 20/10 <em>tiếp theo.</em></h2>
+              <p class="counter-note">Còn bao lâu nữa mình lại có cớ để tặng em hoa? Còn yêu thương thì ngày nào cũng có nhé.</p>
+              <div class="countdown" aria-label="Thời gian còn lại đến ngày 20 tháng 10 tiếp theo">
+                <div class="count-unit"><strong id="countDays">000</strong><span>ngày</span></div><span class="count-separator">·</span>
+                <div class="count-unit"><strong id="countHours">00</strong><span>giờ</span></div><span class="count-separator">·</span>
+                <div class="count-unit"><strong id="countMinutes">00</strong><span>phút</span></div><span class="count-separator">·</span>
+                <div class="count-unit"><strong id="countSeconds">00</strong><span>giây</span></div>
+              </div>
+            </div>
+            <div class="final-message">
+              <i class="quote-mark" data-lucide="quote"></i>
+              <p>Hy vọng món quà bé xíu này làm em mỉm cười. Còn bây giờ, đến lượt em nhắn lại một điều thật dễ thương nhé!</p>
+              <button class="primary-button ripple" id="openMessage" type="button">Gửi phản hồi cho người tặng <i data-lucide="heart"></i></button>
+              <small>Chạm để gửi một lời nhắn ấm áp 💌</small>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">Được làm bằng <span class="footer-heart">♥</span> và một chút dịu dàng · Mừng ngày Phụ nữ Việt Nam 20/10</div>
+    </footer>
+  </div>
+
+  <aside class="music-player" id="musicPlayer" aria-label="Trình phát nhạc piano">
+    <div class="music-disc-wrap"><div class="music-disc"><i data-lucide="music-2"></i></div></div>
+    <div class="music-meta">
+      <span class="music-title">Một khúc piano dịu dàng</span>
+      <span class="music-subtitle"><span class="visualizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span id="musicStatus">Đang chuẩn bị bản nhạc…</span></span>
+    </div>
+    <button class="music-toggle" id="musicToggle" type="button" aria-label="Phát nhạc" disabled><i data-lucide="play"></i></button>
+    <audio id="backgroundAudio" loop preload="auto"></audio>
+  </aside>
+
+  <dialog class="message-dialog" id="messageDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-card">
+      <button class="dialog-close" id="closeDialog" type="button" aria-label="Đóng hộp thoại"><i data-lucide="x"></i></button>
+      <span class="dialog-icon"><i data-lucide="heart-handshake"></i></span>
+      <h2 id="dialogTitle">Bây giờ đến lượt em 💌</h2>
+      <p>Viết một lời nhắn nhỏ nhé. Em có thể chia sẻ qua ứng dụng trên máy hoặc sao chép để gửi cho người tặng.</p>
+      <label for="messageText" class="sr-only">Lời nhắn của bạn</label>
+      <textarea id="messageText" maxlength="320">Cảm ơn vì món quà 20/10 thật dễ thương. Em vui lắm! 💗</textarea>
+      <div class="dialog-actions">
+        <button class="primary-button ripple" id="shareMessage" type="button">Chia sẻ lời nhắn <i data-lucide="send"></i></button>
+        <button class="dialog-later" id="cancelDialog" type="button">Để em nghĩ thêm đã</button>
+      </div>
+    </div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const $ = (selector, context = document) => context.querySelector(selector);
+      const $$ = (selector, context = document) => Array.from(context.querySelectorAll(selector));
+      const toast = $('#toast');
+      let toastTimer;
+      let currentRecipient = 'em';
+
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+
+      // A quiet constellation of rose-gold sparkles behind the page.
+      const sparkleLayer = $('#sparkleLayer');
+      for (let i = 0; i < 34; i += 1) {
+        const sparkle = document.createElement('span');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = `${Math.random() * 100}%`;
+        sparkle.style.top = `${Math.random() * 100}%`;
+        sparkle.style.setProperty('--size', `${2 + Math.random() * 3}px`);
+        sparkle.style.setProperty('--duration', `${6 + Math.random() * 8}s`);
+        sparkle.style.setProperty('--delay', `${-Math.random() * 12}s`);
+        sparkleLayer.appendChild(sparkle);
+      }
+
+      const showToast = (message) => {
+        toast.textContent = message;
+        toast.classList.add('show');
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(() => toast.classList.remove('show'), 3200);
+      };
+
+      const confettiBurst = (origin, count = 65) => {
+        if (typeof window.confetti === 'function') {
+          try {
+            window.confetti({
+              particleCount: count,
+              spread: 82,
+              startVelocity: 34,
+              gravity: .8,
+              scalar: .85,
+              origin,
+              colors: ['#f43f5e', '#ff9eaf', '#f6c7cd', '#e5dafa', '#d8a77f', '#fff2dd'],
+              ticks: 190
+            });
+            if (typeof window.confetti.shapeFromText === 'function') {
+              const heart = window.confetti.shapeFromText({ text: '♥', scalar: 1.4 });
+              window.confetti({ particleCount: Math.max(12, Math.round(count * .38)), spread: 105, startVelocity: 27, gravity: .72, scalar: .95, origin, shapes: [heart], colors: ['#ef5472', '#f490a2', '#da8b9b'], ticks: 220 });
+            }
+          } catch (error) {
+            console.warn('Hiệu ứng confetti không khả dụng trong trình duyệt này.', error);
+          }
+        }
+        sprinkleHearts(origin, Math.min(count, 38));
+      };
+
+      const sprinkleHearts = (origin, count) => {
+        const centerX = Math.round(origin.x * window.innerWidth);
+        const centerY = Math.round(origin.y * window.innerHeight);
+        for (let i = 0; i < count; i += 1) {
+          const heart = document.createElement('span');
+          heart.className = 'burst-heart';
+          heart.textContent = Math.random() > .22 ? '♥' : '✦';
+          heart.style.left = `${centerX + (Math.random() - .5) * 42}px`;
+          heart.style.top = `${centerY + (Math.random() - .5) * 30}px`;
+          heart.style.setProperty('--dx', `${Math.round((Math.random() - .5) * 370)}px`);
+          heart.style.setProperty('--dy', `${Math.round(-100 - Math.random() * (window.innerHeight * .45))}px`);
+          heart.style.setProperty('--duration', `${1.35 + Math.random() * 1.2}s`);
+          heart.style.setProperty('--size', `${12 + Math.random() * 18}px`);
+          heart.style.setProperty('--rot', `${Math.round((Math.random() - .5) * 130)}deg`);
+          heart.style.setProperty('--scale', `${.45 + Math.random() * .85}`);
+          document.body.appendChild(heart);
+          window.setTimeout(() => heart.remove(), 2900);
+        }
+      };
+
+      // Give all prominent buttons a soft, local ripple without blocking their action.
+      $$('.ripple').forEach((button) => {
+        button.addEventListener('click', (event) => {
+          const rect = button.getBoundingClientRect();
+          const ripple = document.createElement('span');
+          const diameter = Math.max(rect.width, rect.height) * 1.25;
+          ripple.className = 'button-ripple';
+          ripple.style.width = `${diameter}px`;
+          ripple.style.height = `${diameter}px`;
+          ripple.style.left = `${event.clientX - rect.left - diameter / 2}px`;
+          ripple.style.top = `${event.clientY - rect.top - diameter / 2}px`;
+          button.appendChild(ripple);
+          window.setTimeout(() => ripple.remove(), 700);
+        });
+      });
+
+      // Personalize the greeting; remember the name on this device when storage is available.
+      const recipientInput = $('#recipientInput');
+      try {
+        const savedRecipient = window.localStorage.getItem('october20Recipient');
+        if (savedRecipient) recipientInput.value = savedRecipient;
+      } catch (_) { /* Local-file browsers may restrict storage. */ }
+
+      const saveRecipient = () => {
+        const cleanName = recipientInput.value.trim().replace(/[<>]/g, '').slice(0, 18) || 'em';
+        currentRecipient = cleanName;
+        recipientInput.value = cleanName;
+        $$('.recipient-name').forEach((element) => { element.textContent = cleanName; });
+        const letterName = $('#envelopeLetter .recipient-name');
+        if (letterName) letterName.textContent = cleanName === 'em' ? 'Em' : cleanName;
+        try { window.localStorage.setItem('october20Recipient', cleanName); } catch (_) { /* Best effort only. */ }
+        showToast(cleanName === 'em' ? 'Tấm thiệp đã sẵn sàng gửi đến em 💌' : `Tấm thiệp đã dành riêng cho ${cleanName} 💌`);
+      };
+      $('#saveName').addEventListener('click', saveRecipient);
+      recipientInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') { event.preventDefault(); saveRecipient(); }
+      });
+      recipientInput.addEventListener('change', saveRecipient);
+
+      // Typewritten greetings with a fresh message on demand.
+      const wishes = [
+        'Chúc em luôn rạng rỡ như nắng sớm, bình yên trong những điều giản dị và đủ dũng cảm để theo đuổi mọi ước mơ của mình. Mong em luôn nhớ: em xứng đáng với thật nhiều yêu thương.',
+        'Mong mỗi ngày của em đều có một điều để mỉm cười, một người để sẻ chia và một khoảng trời riêng để làm điều mình thích. Chúc cô gái tuyệt vời này luôn được nâng niu, hôm nay và cả những ngày sau.',
+        'Cảm ơn em vì đã là chính mình — dịu dàng, mạnh mẽ, đôi khi thật đáng yêu và luôn khiến mọi người thấy ấm lòng. Chúc em một ngày 20/10 ngập tràn hoa, niềm vui và những cái ôm thật chặt.',
+        'Chúc em không chỉ hôm nay mà mỗi ngày đều được sống thật vui, thật tự tin và thật an yên. Cứ tỏa sáng theo cách của em nhé — thế giới này đẹp hơn rất nhiều khi có em.'
+      ];
+      const wishText = $('#wishText');
+      let wishIndex = -1;
+      let typingTimer;
+      const typeWish = (nextIndex) => {
+        window.clearInterval(typingTimer);
+        wishIndex = (nextIndex + wishes.length) % wishes.length;
+        const message = wishes[wishIndex];
+        wishText.textContent = '';
+        wishText.classList.remove('is-done');
+        let position = 0;
+        typingTimer = window.setInterval(() => {
+          wishText.textContent += message.charAt(position);
+          position += 1;
+          if (position >= message.length) {
+            window.clearInterval(typingTimer);
+            wishText.classList.add('is-done');
+          }
+        }, 22);
+      };
+      typeWish(Math.floor(Math.random() * wishes.length));
+      $('#changeWish').addEventListener('click', () => {
+        let next = Math.floor(Math.random() * (wishes.length - 1));
+        if (next >= wishIndex) next += 1;
+        typeWish(next);
+      });
+      $('#sendWish').addEventListener('click', (event) => {
+        confettiBurst({ x: event.clientX / window.innerWidth, y: event.clientY / window.innerHeight }, 38);
+        showToast('Đã gửi một chút yêu thương về phía em 💗');
+      });
+
+      // The opening envelope is the first little surprise.
+      const envelopeScene = $('#envelopeScene');
+      const openGift = $('#openGift');
+      let giftOpened = false;
+      const openEnvelope = () => {
+        if (giftOpened) {
+          document.querySelector('#wish').scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+        giftOpened = true;
+        envelopeScene.classList.add('is-open');
+        openGift.innerHTML = 'Món quà dành riêng cho em <i data-lucide="heart"></i>';
+        openGift.setAttribute('aria-label', 'Món quà đã được mở');
+        if (window.lucide) window.lucide.createIcons();
+        const rect = envelopeScene.getBoundingClientRect();
+        confettiBurst({ x: (rect.left + rect.width * .5) / window.innerWidth, y: (rect.top + rect.height * .43) / window.innerHeight }, 95);
+        window.setTimeout(() => showToast('Một phong thư nhỏ, thật nhiều yêu thương 💌'), 450);
+      };
+      openGift.addEventListener('click', openEnvelope);
+
+      // Horizontal polaroid carousel and a gentle pointer tilt on desktop.
+      const galleryTrack = $('#galleryTrack');
+      const scrollGallery = (direction) => {
+        const card = $('.memory-card', galleryTrack);
+        const cardWidth = card ? card.getBoundingClientRect().width : 280;
+        galleryTrack.scrollBy({ left: direction * (cardWidth + 30), behavior: 'smooth' });
+      };
+      $('#galleryPrev').addEventListener('click', () => scrollGallery(-1));
+      $('#galleryNext').addEventListener('click', () => scrollGallery(1));
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        $$('[data-tilt]').forEach((card) => {
+          card.addEventListener('pointermove', (event) => {
+            const rect = card.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / rect.width - .5;
+            const y = (event.clientY - rect.top) / rect.height - .5;
+            card.style.transition = 'transform .12s ease-out, box-shadow .25s ease';
+            card.style.transform = `rotateX(${-y * 4}deg) rotateY(${x * 5}deg) rotate(var(--tilt)) translateY(-5px)`;
+          });
+          card.addEventListener('pointerleave', () => {
+            card.style.transition = '';
+            card.style.transform = '';
+          });
+        });
+      }
+
+      // Flip cards toggle on touch/click; hover is also enabled for desktop pointers.
+      $$('.flip-card').forEach((card) => {
+        card.addEventListener('click', () => {
+          const isFlipped = card.classList.toggle('is-flipped');
+          card.setAttribute('aria-pressed', String(isFlipped));
+        });
+      });
+
+      // Count down to the next October 20 (if today is October 20, count to next year).
+      const updateCountdown = () => {
+        const now = new Date();
+        let target = new Date(now.getFullYear(), 9, 20, 0, 0, 0, 0);
+        if (target <= now) target = new Date(now.getFullYear() + 1, 9, 20, 0, 0, 0, 0);
+        let remaining = Math.max(0, target.getTime() - now.getTime());
+        const days = Math.floor(remaining / 86400000); remaining %= 86400000;
+        const hours = Math.floor(remaining / 3600000); remaining %= 3600000;
+        const minutes = Math.floor(remaining / 60000); remaining %= 60000;
+        const seconds = Math.floor(remaining / 1000);
+        $('#countDays').textContent = String(days).padStart(3, '0');
+        $('#countHours').textContent = String(hours).padStart(2, '0');
+        $('#countMinutes').textContent = String(minutes).padStart(2, '0');
+        $('#countSeconds').textContent = String(seconds).padStart(2, '0');
+      };
+      updateCountdown();
+      window.setInterval(updateCountdown, 1000);
+
+      // Native share sheet where available, with a copy-to-clipboard fallback.
+      const messageDialog = $('#messageDialog');
+      const openMessage = $('#openMessage');
+      const closeDialog = () => { if (messageDialog.open) messageDialog.close(); };
+      openMessage.addEventListener('click', (event) => {
+        const origin = { x: event.clientX / window.innerWidth, y: event.clientY / window.innerHeight };
+        confettiBurst(origin, 120);
+        window.setTimeout(() => {
+          if (typeof messageDialog.showModal === 'function') messageDialog.showModal();
+          else showToast('Cảm ơn em vì đã gửi một lời nhắn thật dễ thương 💖');
+        }, 180);
+      });
+      $('#closeDialog').addEventListener('click', closeDialog);
+      $('#cancelDialog').addEventListener('click', closeDialog);
+      messageDialog.addEventListener('click', (event) => { if (event.target === messageDialog) closeDialog(); });
+      $('#shareMessage').addEventListener('click', async () => {
+        const text = $('#messageText').value.trim();
+        if (!text) {
+          showToast('Viết một lời nhắn trước nhé 💌');
+          $('#messageText').focus();
+          return;
+        }
+        const shareText = `${text}\n\n— gửi kèm yêu thương ngày 20/10`;
+        if (navigator.share) {
+          try {
+            await navigator.share({ title: 'Một lời nhắn 20/10', text: shareText });
+            closeDialog();
+            showToast('Lời nhắn đã sẵn sàng gửi đi 💗');
+            return;
+          } catch (error) {
+            if (error && error.name === 'AbortError') return;
+          }
+        }
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(shareText);
+          } else {
+            const textarea = $('#messageText');
+            textarea.focus();
+            textarea.select();
+            const copied = document.execCommand('copy');
+            if (!copied) throw new Error('Clipboard copy was not available.');
+          }
+          closeDialog();
+          showToast('Đã sao chép lời nhắn — dán vào Zalo hoặc Messenger nhé 💌');
+        } catch (_) {
+          $('#messageText').focus();
+          $('#messageText').select();
+          showToast('Đã chọn lời nhắn. Nhấn giữ để sao chép và gửi cho người tặng nhé 💌');
+        }
+      });
+
+      // Create a tiny original piano loop locally; it is played through the native <audio> element.
+      const audioElement = $('#backgroundAudio');
+      const musicPlayer = $('#musicPlayer');
+      const musicToggle = $('#musicToggle');
+      const musicStatus = $('#musicStatus');
+      let audioReady = false;
+      const midiFrequency = (midi) => 440 * Math.pow(2, (midi - 69) / 12);
+
+      const bufferToWav = (audioBuffer) => {
+        const channels = audioBuffer.numberOfChannels;
+        const sampleRate = audioBuffer.sampleRate;
+        const sampleCount = audioBuffer.length;
+        const bytesPerSample = 2;
+        const dataSize = sampleCount * channels * bytesPerSample;
+        const arrayBuffer = new ArrayBuffer(44 + dataSize);
+        const view = new DataView(arrayBuffer);
+        const writeString = (offset, value) => {
+          for (let i = 0; i < value.length; i += 1) view.setUint8(offset + i, value.charCodeAt(i));
+        };
+        writeString(0, 'RIFF'); view.setUint32(4, 36 + dataSize, true); writeString(8, 'WAVE');
+        writeString(12, 'fmt '); view.setUint32(16, 16, true); view.setUint16(20, 1, true);
+        view.setUint16(22, channels, true); view.setUint32(24, sampleRate, true);
+        view.setUint32(28, sampleRate * channels * bytesPerSample, true);
+        view.setUint16(32, channels * bytesPerSample, true); view.setUint16(34, 16, true);
+        writeString(36, 'data'); view.setUint32(40, dataSize, true);
+        const channelData = Array.from({ length: channels }, (_, index) => audioBuffer.getChannelData(index));
+        let offset = 44;
+        for (let i = 0; i < sampleCount; i += 1) {
+          for (let channel = 0; channel < channels; channel += 1) {
+            const sample = Math.max(-1, Math.min(1, channelData[channel][i]));
+            view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7fff, true);
+            offset += 2;
+          }
+        }
+        return new Blob([arrayBuffer], { type: 'audio/wav' });
+      };
+
+      const createPianoLoop = async () => {
+        const OfflineContext = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+        if (!OfflineContext) throw new Error('Web Audio offline rendering is not supported.');
+        const sampleRate = 22050;
+        const duration = 12;
+        const context = new OfflineContext(1, sampleRate * duration, sampleRate);
+        const master = context.createGain();
+        master.gain.value = .74;
+        const lowPass = context.createBiquadFilter();
+        lowPass.type = 'lowpass';
+        lowPass.frequency.value = 3900;
+        lowPass.Q.value = .55;
+        master.connect(lowPass);
+        lowPass.connect(context.destination);
+
+        const playNote = (midi, time, length, velocity) => {
+          const frequency = midiFrequency(midi);
+          const envelope = context.createGain();
+          envelope.gain.setValueAtTime(.0001, time);
+          envelope.gain.exponentialRampToValueAtTime(Math.max(.0002, velocity), time + .014);
+          envelope.gain.exponentialRampToValueAtTime(.0001, Math.min(duration - .012, time + length));
+          envelope.connect(master);
+          [[1, 1], [2, .24], [3, .075], [4, .025]].forEach(([partial, volume]) => {
+            const oscillator = context.createOscillator();
+            const partialGain = context.createGain();
+            oscillator.type = 'sine';
+            oscillator.frequency.value = frequency * partial;
+            partialGain.gain.value = volume;
+            oscillator.connect(partialGain);
+            partialGain.connect(envelope);
+            oscillator.start(time);
+            oscillator.stop(Math.min(duration, time + length + .04));
+          });
+        };
+
+        const chords = [
+          { bass: 48, notes: [60, 64, 67, 71], melody: [76, 72, 71, 67, 64, 67, 72, 76] },
+          { bass: 45, notes: [57, 60, 64, 67], melody: [72, 76, 79, 76, 72, 69, 67, 72] },
+          { bass: 41, notes: [53, 57, 60, 64], melody: [69, 72, 76, 72, 69, 67, 64, 69] },
+          { bass: 43, notes: [55, 59, 62, 67], melody: [71, 74, 79, 76, 74, 71, 67, 71] }
+        ];
+        const barLength = 3;
+        chords.forEach((chord, bar) => {
+          const start = bar * barLength;
+          playNote(chord.bass, start, 2.35, .052);
+          chord.notes.forEach((note, index) => playNote(note, start + .08 + index * .47, 1.38, .047));
+          chord.melody.forEach((note, index) => {
+            const time = start + .2 + index * .34;
+            if (time < duration - .25) playNote(note, time, .86, index % 3 === 0 ? .05 : .034);
+          });
+        });
+        const rendered = await context.startRendering();
+        return bufferToWav(rendered);
+      };
+
+      createPianoLoop().then((blob) => {
+        audioElement.src = URL.createObjectURL(blob);
+        audioReady = true;
+        musicToggle.disabled = false;
+        musicStatus.textContent = 'Piano êm dịu · chạm để phát';
+      }).catch((error) => {
+        console.warn('Không thể tạo bản nhạc piano trong trình duyệt này.', error);
+        musicStatus.textContent = 'Nhạc piano · chạm để thử phát';
+        musicToggle.disabled = false;
+        audioReady = true;
+      });
+
+      const syncMusicUI = () => {
+        const playing = !audioElement.paused;
+        musicPlayer.classList.toggle('is-playing', playing);
+        musicToggle.setAttribute('aria-label', playing ? 'Tạm dừng nhạc' : 'Phát nhạc');
+        musicToggle.innerHTML = `<i data-lucide="${playing ? 'pause' : 'play'}"></i>`;
+        if (window.lucide) window.lucide.createIcons();
+        if (playing) musicStatus.textContent = 'Đang phát · piano dịu dàng';
+        else if (audioReady) musicStatus.textContent = 'Piano êm dịu · chạm để phát';
+      };
+      musicToggle.addEventListener('click', async () => {
+        if (!audioReady || !audioElement.src) {
+          showToast('Bản nhạc đang được chuẩn bị một chút nhé 🎹');
+          return;
+        }
+        if (audioElement.paused) {
+          try { await audioElement.play(); }
+          catch (_) { showToast('Trình duyệt chưa thể phát nhạc. Em thử chạm lại nhé 🎶'); }
+        } else {
+          audioElement.pause();
+        }
+        syncMusicUI();
+      });
+      audioElement.addEventListener('play', syncMusicUI);
+      audioElement.addEventListener('pause', syncMusicUI);
+      audioElement.addEventListener('ended', syncMusicUI);
+
+      // Fade sections in gently when they enter the viewport.
+      const revealElements = $$('.reveal');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, activeObserver) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              activeObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: .12, rootMargin: '0px 0px -28px 0px' });
+        revealElements.forEach((element) => observer.observe(element));
+      } else {
+        revealElements.forEach((element) => element.classList.add('is-visible'));
+      }
+    })();
+  </script>
+</body>
+</html>
